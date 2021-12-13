@@ -101,7 +101,8 @@ app.get('/', async (req, res) =>{
 //404 Route
 app.use((req, res) =>{
     res.status(404).render('wishlist/404')
-})
-app.listen(3000, () =>{
-    console.log('Server Started on Port 3000')
+});
+const port = process.env.PORT || 3000
+app.listen(port, () =>{
+    console.log(`Server Started on Port ${port}`)
 })
