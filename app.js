@@ -18,8 +18,8 @@ const wishlistsRoutes = require('./routes/wishlist')
 const userRoutes = require('./routes/users')
 const newRoutes = require('./routes/list')
 //Connecting to our MongoURI
-const localUrl = 'mongodb://localhost:27017/ruths'
-const dbUrl = process.env.DB_URL || localUrl;
+//const localUrl = 'mongodb://localhost:27017/ruths'
+const dbUrl = process.env.DB_URL;
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
@@ -102,12 +102,8 @@ app.get('/', async (req, res) =>{
 app.use((req, res) =>{
     res.status(404).render('wishlist/404')
 });
-//const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000
 
-//app.listen(port, () =>{
-  //  console.log(`Server Started on Port ${port}`)
-//})
-
-app.listen(3000, ()=>{
-    console.log('running on port 3000')
+app.listen(port, () =>{
+    console.log(`Server Started on Port ${port}`)
 })
