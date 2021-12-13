@@ -1,0 +1,41 @@
+    <% layout('layouts/boilerplate') %>
+    
+<div class="row">
+    <h1 class="text-center">Edit Wishlists</h1>
+    <div class="col-6 offset-3">
+        <form action="/wishlists" method="POST" enctype="multipart/form-data" novalidate class="validated-form">
+        <div class="mb-3">
+            <input type="text" class="form-control" name="wishlist[image]"
+            placeholder="Paste a link to your item"> 
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" name="wishlist[title]"
+            placeholder="Name of item" value="<%= wishlist.title %>" required>
+        </div>
+        <div class="mb-3">
+            <textarea name="wishlist[description]" class="form-control"
+            placeholder="Type a personal message"> <%= wishlist.description %></textarea>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">$</span>
+            </div>
+            <input type="text" value="<%= wishlist.price %>" class="form-control" name="wishlist[price]" placeholder="Amount" required>
+          </div>
+        <div class="mb-3">
+            <input type="file" class="form-control" name="image" id="" multiple>
+
+            <% wishlist.images.forEach(function(img, i){ %> 
+                <img src="<%= img.thumbnail %>" class="img-fluid">
+                <input type="checkbox" name="deleteImages[]" id="image-<%= i %>"
+                value="<%= img.filename %> " required
+                >
+                <% }) %> 
+        </div>
+            
+            <button class="btn btn-primary btn-block mb-3">UPDATE WISHLIST</button>
+        </form> 
+        <a class="btn btn-success" href="/wishlists/<%= wishlist._id %>">Back to Wishlists</a>
+    </div>
+</div> 
+    

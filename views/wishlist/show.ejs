@@ -1,0 +1,27 @@
+<% layout('layouts/boilerplate') %> 
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <% for(let img of wishlist.images){ %>
+                <img class="card-img-top" src="<%= img.url %>" alt="Couples Image">
+            <% } %> 
+            <div class="card-body">
+              <h5 class="card-title"><%= wishlist.title %></h5>
+              <p class="card-text"><%= wishlist.description %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Created by: <%= wishlist.author.username %></li>
+            </ul>
+            <div class="card-body">
+                <% if( currentUser && wishlist.author.equals(currentUser._id)){ %> 
+                    <a href="/wishlists/<%= wishlist._id %>/edit " class=" card-link btn btn-warning">Edit</a>
+                
+                        <form class="d-inline" action="/wishlists/<%= wishlist._id %>?_method=DELETE" method="POST">
+                        <button class="card-link btn btn-danger">Delete</button>
+                        </form>
+                <% } %> 
+              <a href="/" class="card-link">Back</a>
+            </div>
+          </div>
+    </div>
+</div>

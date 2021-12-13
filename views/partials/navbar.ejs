@@ -1,0 +1,100 @@
+<header class="text-gray-400 bg-gray-100 body-font w-full" >
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+      <!--<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-purple-500 rounded-full" viewBox="0 0 24 24">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>-->
+      <img src="/img/logo.png" alt="Logo" class="w-60">
+      <!--<span class="ml-3 text-xl">RuthandSheba</span>-->
+    </a>
+    <% if(!currentUser) {%> 
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+      <a class="mr-5 hover:text-white" href="/login" >Sign In</a>
+      <a class="mr-5 hover:text-white" href="/register">Register</a>
+      <% }else{ %> 
+      <a class="mr-5 hover:text-white" href="/logout">Sign Out</a>
+      
+    </nav>
+    <% } %> 
+    <!--<button class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">Button
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+    </button>-->
+  </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">RuthandSheba</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav">
+        
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/">All Wishlists</a>
+        <a class="nav-link" href="/">New Wishlists</a>
+      
+      </div>
+      
+      <div class="navbar-nav ms-auto ">
+        <% if(!currentUser){ %> 
+        <a class="nav-link" href="/login">Login</a>
+        <a class="nav-link" href="/register">Register</a>
+    <% }else{ %> 
+      <a class="nav-link" href="/logout">Sign Out <%= currentUser.username %> </a>
+      <% } %> 
+    </div>
+  
+    </div>
+  </div>
+</nav> -->
+
+<!-- <nav class="navbar">
+  <div>
+    <h2>RuthnSheba</h2>
+  </div>
+  <div>
+    <ul class="list">
+      <li class="list-items">
+        <a class="list-link" href="/wishlists/dashboard">Dashboard</a>
+        </li>
+        <% if(!currentUser){ %> 
+        <li class="list-items">
+          <a class="list-link" href="/login">Login</a>
+          </li>
+          <li class="list-items">
+            <a class="list-link" href="/register">Sign Up</a>
+            </li>
+          <% }else{ %> 
+            <li class="list-items">
+              <a class="list-link" href="/logout">Log Out <%= currentUser.username %> </a>
+              </li>
+            <% } %> 
+    </ul>
+  </div>
+</nav>
+ -->
