@@ -102,7 +102,12 @@ app.get('/', async (req, res) =>{
 app.use((req, res) =>{
     res.status(404).render('wishlist/404')
 });
-const port = process.env.PORT || 3000
-app.listen(port, () =>{
-    console.log(`Server Started on Port ${port}`)
+//const port = process.env.PORT || 3000
+
+//app.listen(port, () =>{
+  //  console.log(`Server Started on Port ${port}`)
+//})
+
+app.listen(3000, ()=>{
+    console.log('running on port 3000')
 })
