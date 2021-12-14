@@ -45,6 +45,41 @@ max-w-7xl
             <span> ₦<%= item.price %> </span>
           </div>
           <p class="mx-auto text-base font-medium leading-relaxed text-gray-500"> <%= item.description %>  </p>
+          <div class="inline-flex justify-between w-full mt-2">
+            <button class="px-2
+            py-2
+            text-base
+            font-medium
+            text-white
+            bg-green-600
+            border border-transparent
+            rounded-full
+            shadow
+            hover:bg-green-700
+            focus:outline-none
+            focus:ring-2
+            focus:ring-white
+            focus:ring-offset-2
+            focus:ring-offset-gray-300
+            sm:px-10">Edit</button>
+            <form action="/wishlists/<%= wishlist._id %>/items/<%= item._id %>?_method=DELETE" method="POST">
+            <button class="py-2
+            text-base
+            font-medium
+            text-white
+            bg-red-600
+            border border-transparent
+            rounded-full
+            shadow
+            hover:bg-red-700
+            focus:outline-none
+            focus:ring-2
+            focus:ring-white
+            focus:ring-offset-2
+            focus:ring-offset-gray-300
+            sm:px-10">Delete</button>
+          </form>
+          </div>
         </div>
       <% } %> 
     </div>

@@ -83,12 +83,13 @@ router.put('wishlists/:id', isLoggedIn, isAuthor, upload.array('image'), async (
     res.redirect(`/wishlists/${wishlist._id}`)
 })
 
-router.delete('wishlists/:id', isLoggedIn, isAuthor, async (req, res) =>{
-    const { id } = req.params
-    await Wishlist.findByIdAndDelete(id)
+router.delete('/wishlists/:id/items/:itemId', async (req, res) =>{
+    const { id, itemId } = req.params
+    await List.findByIdAndUpdate(id, { $pull: {items: itemId}})
+    await Wishlist.findByIdAndDelete(itemId)
     req.flash('success', 'Wishlist deleted')
-    res.redirect('/')
-    //res.send("It worked")
+    res.redirect(`/wishlists/${id}`)
+    //res.send("It workeds")
 })
 
 //Submitting Wish Items Forms

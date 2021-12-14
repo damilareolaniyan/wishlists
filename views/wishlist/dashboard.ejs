@@ -3,7 +3,7 @@
     <div class="flex min-h-screen overflow-hidden">
       <div class="relative flex-1 hidden w-0 overflow-hidden lg:block">
         <h2 class="mt-6 text-3xl font-extrabold text-neutral-600"> Create new wishlist </h2>
-        <img class="absolute inset-0 object-cover w-full h-full bg-black" src="https://d33wubrfki0l68.cloudfront.net/1a058aec6e3d81efe3ac4ca6366b40574876f6bc/32bc1/images/placeholders/rectanglewide.svg" alt="">
+        <img class="absolute inset-0 object-cover w-full h-full bg-black" src="/img/couples.jpeg" alt="">
       </div>
       <div class="
     flex flex-col
@@ -87,6 +87,7 @@
 
 
 <!--Designing-->
+
 <section>
   <div class="px-4 py-12 mx-auto">
     <div class="max-w-4xl pt-24 mx-auto">
@@ -99,28 +100,17 @@
         </div>
       </div>
       <% for(let wishlist of wishlists){ %>
-      <div class="space-y-8 lg:divide-y lg:divide-gray-100">
-        <div class="pt-8 sm:flex lg:items-end group">
-          <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-4">
-            <img class="w-full rounded-md lg:h-32 lg:w-32" src="https://images.unsplash.com/photo-1616651181620-9906d6e43fc3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cGF0dGVybnxlbnwwfDJ8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="text">
-          </div>
-          <div>
-            <!-- <span class="text-sm text-gray-500">August 20.20.21</span> -->
-            <p class="mt-3 text-lg font-medium mb-3">
-              <a href="/wishlists/<%= wishlist._id %>" class="
-            text-xl text-neutral-600
-            group-hover:text-gray-500
-            lg:text-2xl
-          "><%= wishlist.name %> </a>
-            </p>
-            <a href="/wishlists/<%= wishlist._id %>" class="bg-red-600 text-center text-white py-2 px-24 mt-4">View</a>
-            <!-- <p class="mt-2 text-lg text-gray-500"> A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. </p> -->
-          </div>
-        </div>
-        <div class="pt-8 sm:flex lg:items-end group">
-</div>
-</div>
-<% } %> 
+<a href="/wishlists/<%= wishlist._id %>" class="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="/img/couples.jpeg" alt="">
+  <div class="flex flex-col justify-between p-4 leading-normal">
+  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= wishlist.name %> </h5>
+  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Kindly, click to view and add items to your wishlist</p>
+  </div>
+  </a>
+  <% } %> 
+      
+      
+
 </div>
 </div>
 </section>

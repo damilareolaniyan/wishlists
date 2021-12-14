@@ -3,7 +3,7 @@ if(process.env.NODE_ENV !== "production"){
     require('dotenv').config()
 }
 
-const express = require('express')
+const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose')
 const ejsMate = require('ejs-mate')
@@ -18,8 +18,8 @@ const wishlistsRoutes = require('./routes/wishlist')
 const userRoutes = require('./routes/users')
 const newRoutes = require('./routes/list')
 //Connecting to our MongoURI
-//const localUrl = 'mongodb://localhost:27017/ruths'
-const dbUrl = process.env.DB_URL;
+const localUrl = 'mongodb://localhost:27017/ruths'
+const dbUrl = process.env.DB_URL || localUrl;
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
