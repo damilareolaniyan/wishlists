@@ -26,14 +26,14 @@ router.get('/wishlists/new/item', isLoggedIn, (req, res) =>{
 
 //Dashboard Page
 router.get('/wishlists/dashboard', isLoggedIn, async (req, res) =>{
-    const wishlists = await List.find({}).sort({ date: -1})
+    const wishlists = await List.find({}).sort({ date: -1}).populate('author')
     res.render('wishlist/dashboard', {wishlists})
 })
 
 
 
 //Submitting Creating New Wishlist
-router.post('/wishlists/new', async (req, res)=>{
+router.post('/wishlists/new', isLoggedIn, isAuthor, async (req, res)=>{
     const wishlist = new List(req.body.wishlist)
     await wishlist.save();
     res.redirect(`/wishlists/${wishlist._id}`)
@@ -48,7 +48,7 @@ router.get('/wishlists/:id', async(req, res) =>{
         req.flash('error', 'Wishlist not found')
         return res.redirect('/')
     }
-    console.log(wishlist)
+    //console.log(wishlist)
 res.render('wishlist/page', {wishlist})
 
 })
@@ -100,7 +100,7 @@ router.post('/wishlists/:id/items', upload.array('image'),  async(req, res) =>{
       //item.author = req.user._id;
       wishlist.items.push(item)
       await item.save();
-      console.log(item)
+      //console.log(item)
       await wishlist.save()
       
       req.flash('success', 'Successfully made a new wishlist')

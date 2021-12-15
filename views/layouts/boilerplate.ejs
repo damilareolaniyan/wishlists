@@ -10,30 +10,13 @@
 </head>
 <body>
     <%- include('../partials/navbar') %> 
-    <main >
+    <main>
         <%- include('../partials/flash') %>
         <%- body %> 
         
     </main>
     <%- include('../partials/footer') %> 
-    
-    <script>
-      window.addEventListener('DOMContentLoaded', () =>{
-          const overlay = document.querySelector('#overlay')
-          const delBtn = document.querySelector('#delete-btn')
-          const closeBtn = document.querySelector('#close-modal')
-  
-          const toggleModal = () => {
-              overlay.classList.toggle('hidden')
-              overlay.classList.toggle('flex')
-          }
-  
-          delBtn.addEventListener('click', toggleModal)
-  
-          closeBtn.addEventListener('click', toggleModal)
-      })
-  
-  </script>
+    <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
 
   
 <!-- JavaScript Bundle with Popper -->

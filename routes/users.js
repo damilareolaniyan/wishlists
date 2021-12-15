@@ -13,7 +13,7 @@ router.post('/register', async(req, res, next) =>{
         const registeredUser = await User.register(user, password)
         req.login(registeredUser, err =>{
             if(err) return next(err)
-            req.flash('success', 'Register success')
+            //req.flash('success', 'Register success')
             res.redirect('/wishlists/dashboard')
         })
     }catch(e){
@@ -32,12 +32,12 @@ router.get('/test', (req, res)=>{
 })
 
 router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login'}), (req, res) =>{
-    req.flash('success', 'Welcome back')
+    //req.flash('success', 'Welcome back')
     res.redirect('/wishlists/dashboard')
 })
 router.get('/logout', (req, res)=>{
     req.logout();
-    req.flash('success', 'Bye')
+    //req.flash('success', 'Bye')
     res.redirect('/')
 })
 module.exports = router;
