@@ -18,7 +18,9 @@ const wishlistsRoutes = require('./routes/wishlist')
 const userRoutes = require('./routes/users')
 const newRoutes = require('./routes/list')
 //Connecting to our MongoURI
-const dbUrl = 'mongodb://localhost:27017/sheba'
+
+const dbUrl = process.env.DB_URL
+//'mongodb://localhost:27017/sheba'
 //process.env.DB_URL 
 
 mongoose.connect(dbUrl, {

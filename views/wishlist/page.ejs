@@ -73,7 +73,7 @@ max-w-7xl
             focus:ring-white
             focus:ring-offset-2
             focus:ring-offset-gray-300
-            sm:px-10"><a href="/">Edit</a></button>
+            sm:px-10"><a href="/wishlists/<%= wishlist._id%>/items/<%= item._id %>/edit  ">Edit</a></button>
             <form action="/wishlists/<%= wishlist._id %>/items/<%= item._id %>?_method=DELETE" method="POST">
             <button class="py-2
             text-base

@@ -56,8 +56,9 @@ res.render('wishlist/page', {wishlist})
 
 //Edit Page
 router.get('/wishlists/:id/items/:itemid/edit', isLoggedIn, isAuthor, async(req, res) =>{
-    const { id } = req.params;
-    const wishlist = await Wishlist.findById(id)
+    const { id, itemId } = req.params;
+    const wish = await List.findById(id)
+    const wishlist = await Wishlist.findById(itemId)
     if(!wishlist){
         req.flash('error', 'Cannot find that wishlist')
         return res.redirect('/')
