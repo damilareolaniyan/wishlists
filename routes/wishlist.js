@@ -33,8 +33,9 @@ router.get('/wishlists/dashboard', isLoggedIn, async (req, res) =>{
 
 
 //Submitting Creating New Wishlist
-router.post('/wishlists/new', isLoggedIn, isAuthor, async (req, res)=>{
+router.post('/wishlists/new', isLoggedIn, async (req, res)=>{
     const wishlist = new List(req.body.wishlist)
+    wishlist.author = req.user._id;
     await wishlist.save();
     res.redirect(`/wishlists/${wishlist._id}`)
 })
@@ -54,7 +55,7 @@ res.render('wishlist/page', {wishlist})
 })
 
 //Edit Page
-router.get('/wishlists/:id/edit', isLoggedIn, isAuthor, async(req, res) =>{
+router.get('/wishlists/:id/items/:itemid/edit', isLoggedIn, isAuthor, async(req, res) =>{
     const { id } = req.params;
     const wishlist = await Wishlist.findById(id)
     if(!wishlist){
@@ -97,7 +98,7 @@ router.post('/wishlists/:id/items', upload.array('image'),  async(req, res) =>{
     const wishlist = await List.findById(req.params.id)
       const item = new Wishlist(req.body.wishlist)
       item.images = req.files.map(f =>({ url: f.path, filename: f.filename}))
-      //item.author = req.user._id;
+      //
       wishlist.items.push(item)
       await item.save();
       //console.log(item)

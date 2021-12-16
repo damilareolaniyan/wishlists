@@ -17,7 +17,11 @@ const WishlistSchema = new Schema({
     title: String,
     description: String,
     price: Number,
-    images: [ImageSchema]
+    images: [ImageSchema],
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    } 
 })
 
 module.exports = mongoose.model('Wishlist', WishlistSchema);

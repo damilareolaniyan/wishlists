@@ -1,27 +1,37 @@
 <% layout('layouts/boilerplate') %>
-<section class="overflow-hidden">
-    <div class="flex min-h-screen overflow-hidden">
-      <div class="relative flex-1 hidden w-0 overflow-hidden lg:block">
-        <h2 class="mt-6 text-3xl font-extrabold text-neutral-600"> Create new wishlist </h2>
-        <img class="absolute inset-0 object-cover w-full h-full bg-black" src="/img/couples.jpeg" alt="">
+
+
+<!--Tes-->
+<section>
+  <div class=" 2xl:max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24 2xl:px-12 px-4 py-12 mx-auto border border-gray-200 rounded-lg">
+    <div class="2xl:max-w-7xl flex flex-wrap items-center mx-auto">
+     
+        
+      
+        
+     
+      <!---->
+      <div class=" lg:flex-grow lg:w-1/2 lg:pr-24 md:mb-0 flex flex-col items-start mb-16 text-left">
+       
+          <p class="mb-2 text-lg font-bold tracking-tight text-black dark:text-white">Welcome <%= currentUser.username%></p>
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-black-900 dark:text-white">All Wishlists</h5>
+      
+      <% for(let wishlist of wishlists){ %>
+        <a href="/wishlists/<%= wishlist._id %>" class="block max-w-xl py-6 px-24 mb-3 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-black dark:text-white"><%= wishlist.name %></h5>
+          <p class="font-normal text-gray-700 dark:text-gray-400"></p>
+      </a>
+    <% } %> 
+        
       </div>
-      <div class="
-    flex flex-col
-    justify-center
-    flex-1
-    px-4
-    py-12
-    overflow-hidden
-    sm:px-6
-    lg:flex-none lg:px-20
-    xl:px-24
-  ">
-        <div class="w-full max-w-xl mx-auto lg:w-96">
-          <div>
-            <h2 class="mt-6 text-3xl font-extrabold text-neutral-600"> Create new wishlist </h2>
-          </div>
-          <div class="mt-8">
-            <div class="mt-6">
+      <div class="lg:w-5/6 lg:max-w-lg xl:mt-0 w-full mt-12">
+        <div>
+          <div class="relative w-full max-w-lg">
+            <div class=" bg-violet-300 -left-4 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob absolute top-0 rounded-full"></div>
+            <div class=" bg-fuchsia-300 -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 absolute rounded-full"></div>
+            
+              <h2 class="mt-6 text-3xl font-extrabold text-neutral-600"> Create new wishlist </h2>
+              <div class="mt-6">
                 <form action="/wishlists/new" class="space-y-6" method="POST" >
                     <div>
                         <label for="name" class="block text-sm font-medium text-neutral-600"> Name your wishlist</label>
@@ -38,7 +48,7 @@
                         ease-in-out
                         transform
                         border border-transparent
-                        rounded-lg
+                        rounded-full
                         bg-gray-50
                         focus:outline-none
                         focus:border-transparent
@@ -64,7 +74,7 @@
                 ease-in-out
                 transform
                 bg-red-600
-                rounded-xl
+                rounded-full
                 hover:bg-red-700
                 focus:outline-none
                 focus:ring-2
@@ -76,42 +86,14 @@
              
                   
                 </div>
-              
-            </div>
+            
           </div>
         </div>
       </div>
     </div>
-  </section>
-
- 
-
-<!--Designing-->
-
-<section>
-  <div class="px-4 py-12 mx-auto">
-    <div class="max-w-4xl pt-24 mx-auto">
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center" aria-hidden="true">
-          <div class="w-full border-t border-black"></div>
-        </div>
-        <div class="relative flex justify-start">
-          <span class="pr-3 text-lg font-medium text-neutral-600 bg-white"> All wishlists</span>
-        </div>
-      </div>
-      <% for(let wishlist of wishlists){ %>
-<a href="/wishlists/<%= wishlist._id %>" class="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-  <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="/img/couples.jpeg" alt="">
-  <div class="flex flex-col justify-between p-4 leading-normal">
-  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= wishlist.name %> </h5>
-  <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Kindly, click to view and add items to your wishlist</p>
   </div>
-  </a>
-  <% } %> 
-      
-      
-
-</div>
-</div>
 </section>
 
+
+<!--Test-->
+ 
