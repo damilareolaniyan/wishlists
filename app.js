@@ -19,9 +19,9 @@ const userRoutes = require('./routes/users')
 const newRoutes = require('./routes/list')
 //Connecting to our MongoURI
 
-const dbUrl = process.env.DB_URL
+const dbUrl = process.env.DB_URL;
 //'mongodb://localhost:27017/sheba'
-//process.env.DB_URL 
+ 
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,

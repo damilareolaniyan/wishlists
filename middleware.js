@@ -19,3 +19,8 @@ module.exports.isAuthor = async(req, res, next)=>{
     }
     next();
 }
+
+module.exports.isPublic = (req, res, next)=>{
+    req.logout()
+    next()
+}

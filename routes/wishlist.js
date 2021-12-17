@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const List = require('../models/newwish')
 const Wishlist = require('../models/wishlist')
-const {isLoggedIn, isAuthor } = require('../middleware')
+const {isLoggedIn, isAuthor, isPublic } = require('../middleware')
 const multer = require('multer')
 const { cloudinary, storage } = require('../cloudinary')
 const upload = multer({ storage })
@@ -53,11 +53,18 @@ router.get('/wishlists/:id', async(req, res) =>{
 res.render('wishlist/page', {wishlist})
 
 })
+//Public Page 
+router.get('/wishlists/:id/share', async(req, res) =>{
+    
+    //const { public } = req.query;
+    const wishlist = await List.findById(req.params.id).populate('items')
+    res.render('wishlist/public', {wishlist})
+})
 
 //Edit Page
-router.get('/wishlists/:id/items/:itemid/edit', isLoggedIn, isAuthor, async(req, res) =>{
+router.get('/wishlists/:id/items/:itemid/edit', isLoggedIn,  async(req, res) =>{
     const { id, itemId } = req.params;
-    const wish = await List.findById(id)
+    await List.findById(id).populate('items')
     const wishlist = await Wishlist.findById(itemId)
     if(!wishlist){
         req.flash('error', 'Cannot find that wishlist')
@@ -105,7 +112,7 @@ router.post('/wishlists/:id/items', upload.array('image'),  async(req, res) =>{
       //console.log(item)
       await wishlist.save()
       
-      req.flash('success', 'Successfully made a new wishlist')
+      req.flash('success', 'New item succesfully added')
       res.redirect(`/wishlists/${wishlist._id}`)
 })
 
