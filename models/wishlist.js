@@ -17,7 +17,7 @@ const WishlistSchema = new Schema({
     title: String,
     description: String,
     price: Number,
-    images: ImageSchema,
+    images: String,
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
