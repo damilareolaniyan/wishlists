@@ -49,7 +49,7 @@ router.get('/wishlists/:id', async(req, res) =>{
         req.flash('error', 'Wishlist not found')
         return res.redirect('/')
     }
-    //console.log(wishlist)
+    console.log(wishlist.images)
 res.render('wishlist/page', {wishlist})
 
 })
@@ -62,9 +62,8 @@ router.get('/wishlists/:id/share', async(req, res) =>{
 })
 
 //Edit Page
-router.get('/wishlists/:id/items/:itemid/edit', isLoggedIn,  async(req, res) =>{
-    const { id, itemId } = req.params;
-    await List.findById(id).populate('items')
+router.get('/wishlists/edit/:id', isLoggedIn,  async(req, res) =>{
+    const itemId = req.params.id;
     const wishlist = await Wishlist.findById(itemId)
     if(!wishlist){
         req.flash('error', 'Cannot find that wishlist')
@@ -75,21 +74,25 @@ router.get('/wishlists/:id/items/:itemid/edit', isLoggedIn,  async(req, res) =>{
     res.render('wishlist/edit', {wishlist})
 })
 //Update Post
-router.put('wishlists/:id', isLoggedIn, isAuthor, upload.array('image'), async (req, res) =>{
-    const { id } = req.params
-    const wishlist = await Wishlist.findByIdAndUpdate(id, { ...req.body.wishlist})
-    const imgs = req.files.map(f =>({ url: f.path, filename: f.filename}))
-    wishlist.images.push(...imgs)
-    await wishlist.save()
-    if(req.body.deleteImages){
-        for( let filename of req.body.deleteImages){
-            await cloudinary.uploader.destroy(filename)
+router.post('/wishlists/edit/:id',  isLoggedIn, upload.array('image'),(req, res) =>{
+    let wishlist = {};
+    wishlist.title = req.body.title;
+    wishlist.image = req.body.image;
+    wishlist.price = req.body.price;
+    wishlist.description = req.body.description;
+    wishlist.author = req.user._id;
+
+    let query = {_id: req.params.id}
+
+    console.log(query);
+    console.log(wishlist);
+
+    Wishlist.updateOne(query, wishlist).then(
+        () => {
+            res.redirect(`/wishlists/${wishlist._id}`);
         }
-        await wishlist.updateOne({ $pull: { images: {filename: { $in: req.body.deleteImages}}}})
-    }
-    req.flash('success', 'Successfully updated')
-    //res.send('Updated Okay')
-    res.redirect(`/wishlists/${wishlist._id}`)
+    )
+    
 })
 
 router.delete('/wishlists/:id/items/:itemId', async (req, res) =>{
