@@ -49,7 +49,7 @@ router.get('/wishlists/:id', async(req, res) =>{
         req.flash('error', 'Wishlist not found')
         return res.redirect('/')
     }
-    console.log(wishlist.images)
+    //console.log(wishlist.images)
 res.render('wishlist/page', {wishlist})
 
 })
@@ -108,7 +108,7 @@ router.delete('/wishlists/:id/items/:itemId', async (req, res) =>{
 router.post('/wishlists/:id/items', upload.array('image'),  async(req, res) =>{
     const wishlist = await List.findById(req.params.id)
       const item = new Wishlist(req.body.wishlist)
-      item.images = req.files.map(f =>({ url: f.path, filename: f.filename}))
+      //item.images = req.files.map(f =>({ url: f.path, filename: f.filename}))
       //
       wishlist.items.push(item)
       await item.save();
