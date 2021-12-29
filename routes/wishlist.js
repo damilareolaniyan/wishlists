@@ -26,7 +26,11 @@ router.get('/wishlists/new/item', isLoggedIn, (req, res) =>{
 
 //Dashboard Page
 router.get('/wishlists/dashboard', isLoggedIn, async (req, res) =>{
-    const wishlists = await List.find({}).sort({ date: -1}).populate('author')
+    let user = req.user.id;
+    const wishlists = await List.find({authorID: user}).sort({ date: -1}).populate('author')
+
+    //console.log(wishlists)
+
     res.render('wishlist/dashboard', {wishlists})
 })
 
@@ -35,7 +39,8 @@ router.get('/wishlists/dashboard', isLoggedIn, async (req, res) =>{
 //Submitting Creating New Wishlist
 router.post('/wishlists/new', isLoggedIn, async (req, res)=>{
     const wishlist = new List(req.body.wishlist)
-    wishlist.author = req.user._id;
+    wishlist.authorID = req.user.id;
+    //console.log(wishlist.authorID);
     await wishlist.save();
     res.redirect(`/wishlists/${wishlist._id}`)
 })
@@ -74,22 +79,23 @@ router.get('/wishlists/edit/:id', isLoggedIn,  async(req, res) =>{
     res.render('wishlist/edit', {wishlist})
 })
 //Update Post
-router.post('/wishlists/edit/:id',  isLoggedIn, upload.array('image'),(req, res) =>{
+router.post('/wishlists/edit/:id',  isLoggedIn, upload.single('image'),(req, res) =>{
     let wishlist = {};
     wishlist.title = req.body.title;
-    wishlist.image = req.body.image;
     wishlist.price = req.body.price;
     wishlist.description = req.body.description;
     wishlist.author = req.user._id;
 
     let query = {_id: req.params.id}
 
-    console.log(query);
-    console.log(wishlist);
+    
+
+    //console.log(query);
+    //console.log(wishlist);
 
     Wishlist.updateOne(query, wishlist).then(
         () => {
-            res.redirect(`/wishlists/${wishlist._id}`);
+            res.redirect('/wishlists/dashboard');
         }
     )
     
@@ -105,11 +111,11 @@ router.delete('/wishlists/:id/items/:itemId', async (req, res) =>{
 })
 
 //Submitting Wish Items Forms
-router.post('/wishlists/:id/items', upload.array('image'),  async(req, res) =>{
-    const wishlist = await List.findById(req.params.id)
-      const item = new Wishlist(req.body.wishlist)
-      //item.images = req.files.map(f =>({ url: f.path, filename: f.filename}))
-      //
+router.post('/wishlists/:id/items', upload.single('image'),  async(req, res) =>{
+    const wishlist = await List.findById(req.params.id);
+      const item = new Wishlist(req.body.wishlist);
+      item.images = req.file.path;
+      
       wishlist.items.push(item)
       await item.save();
       //console.log(item)

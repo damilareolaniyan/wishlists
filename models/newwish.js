@@ -11,7 +11,12 @@ const ListSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    } 
+    },
+    authorID: String,
+    date: {
+        type: Date,
+        default:Date.now
+    }
 
 })
 
