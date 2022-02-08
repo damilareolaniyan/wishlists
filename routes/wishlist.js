@@ -6,6 +6,7 @@ const {isLoggedIn, isAuthor, isPublic } = require('../middleware')
 const multer = require('multer')
 const { cloudinary, storage } = require('../cloudinary')
 const upload = multer({ storage })
+
 //const upload = multer({ dest: 'uploads/'})
 
 //All Main Page
@@ -79,11 +80,12 @@ router.get('/wishlists/edit/:id', isLoggedIn,  async(req, res) =>{
     res.render('wishlist/edit', {wishlist})
 })
 //Update Post
-router.post('/wishlists/edit/:id',  isLoggedIn, upload.single('image'),(req, res) =>{
+router.post('/wishlists/edit/:id',  isLoggedIn, upload.array('image'),(req, res) =>{
     let wishlist = {};
     wishlist.title = req.body.title;
     wishlist.price = req.body.price;
     wishlist.description = req.body.description;
+    wishlist.images = req.files.map(i =>({ url: i.path, filename: i.filename}));
     wishlist.author = req.user._id;
 
     let query = {_id: req.params.id}
@@ -111,10 +113,10 @@ router.delete('/wishlists/:id/items/:itemId', async (req, res) =>{
 })
 
 //Submitting Wish Items Forms
-router.post('/wishlists/:id/items', upload.single('image'),  async(req, res) =>{
+router.post('/wishlists/:id/items', upload.array('image'),  async(req, res) =>{
     const wishlist = await List.findById(req.params.id);
       const item = new Wishlist(req.body.wishlist);
-      item.images = req.file.path;
+      item.images = req.files.map(i =>({ url: i.path, filename: i.filename}))
       
       wishlist.items.push(item)
       await item.save();

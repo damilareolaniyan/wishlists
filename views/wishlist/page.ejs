@@ -37,6 +37,7 @@ max-w-7xl
     <div class="grid w-full grid-cols-1 gap-6 mx-auto lg:grid-cols-3 ">
       <% for(let item of wishlist.items){ %>
         <div class="p-6 border-2">
+          <% for(let img of item.images){ %> 
           <img class="
         object-cover object-center
         w-full
@@ -44,7 +45,8 @@ max-w-7xl
         lg:h-48
         md:h-36
         rounded-xl
-      " src="<%= item.images %> " alt=" Wedding Image">
+      " src="<%= img.url %> " alt=" Wedding Image">
+          <% } %> 
           <div class="inline-flex justify-between w-full">
             <h1 class="
           mb-8
@@ -119,10 +121,7 @@ max-w-7xl
   </div>
   <form action="/wishlists/<%= wishlist._id%>/items" method="POST" enctype="multipart/form-data" class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
   <h3 class="text-xl font-medium text-gray-900 dark:text-white">Add new item</h3>
-  <div> 
-  <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Image Url</label>
-  <input type="text" name="wishlist[image]" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="https:/google.com/image.jpg" required>
-  </div>
+  
 <!--Title-->  
 <div> 
   <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Title</label>
