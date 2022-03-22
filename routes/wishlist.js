@@ -103,7 +103,7 @@ router.post('/wishlists/edit/:id',  isLoggedIn, upload.array('image'),(req, res)
     
 })
 //Wishlist Delete
-router.delete('/wishlists/:id', (req, res)=>{
+router.delete('/wishlists/:id', async (req, res)=>{
     const { id } = req.params
     await List.findByIdAndDelete(id)
     req.flash('success', 'Wishlist deleted')
