@@ -24,9 +24,6 @@
                   <h5 class="mb-2 text-2xl font-bold tracking-tight text-black dark:text-white"><%= wishlist.name %></h5>
                   <p class="font-normal text-gray-700 dark:text-gray-400"><a href="/wishlists/<%= wishlist._id %>">View</a></p>
               
-                  <form action="/wishlists/<%= wishlist._id %>?_method=DELETE" method="POST">
-                  <button class="px-3 py-1 bg-red-600 text-white hover:bg-red-700 rounded-full">Delete</button>
-                  </form>
                   
               </a>
             <% } %> 
