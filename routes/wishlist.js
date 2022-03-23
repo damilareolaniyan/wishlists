@@ -20,6 +20,16 @@ router.get('/about', (req, res) =>{
     res.render('wishlist/about')
 })
 
+//Privacy Page
+router.get('/privacy', (req, res) =>{
+    res.render('wishlist/privacy')
+})
+
+//Terms Page
+router.get('/terms', (req, res) =>{
+    res.render('wishlist/terms')
+})
+
 //Show Wishlist Form
 router.get('/wishlists/new/item', isLoggedIn, (req, res) =>{
     res.render('wishlist/congrats')
